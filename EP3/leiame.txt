@@ -1,0 +1,15 @@
+Giovanna Girotto - 11803416  &  Vittor Braide Costa - 11806920 
+
+O código para o EP3 foi desenvolvido em Python e consiste numa junção com os outros códigos produzidos nos trabalhos anteriores. Para esse exercício programa em questão, 
+o objetivo consiste em aplicar o método de Rayleigh-Ritz e, para tanto, foi utilizado o livro texto da disciplina como auxílio durante o desenvolvimento. 
+
+A estrutura do código contém 6 funções, 3 já existentes, 'integracao_gaussiana' do EP2, 'solucao_sistema' e 'decomposicao_LU' do EP1 e 3 novas funções. A primeira foi denominada como 
+'fourier_fem' e consiste na aplicação do método de elementos finitos, já 'validacao' consiste numa função criada para desenvolver os 2 exemplos propostos no enuciado 
+para conferir os resultados obtidos. Por último, 'plot_temp_pos' representa uma função para construir os gráficos de Temperatura x posição usando a biblioteca matplotlib.
+
+
+Assim sendo, quando executa-se o código os gráficos vão sendo gerados automaticamente, os 5 primeiros condizem ao primeiro exercício de validação, já os 5 seguintes ao segundo 
+exercício de validação. Os posteriores correspondem à condição Q+ constante Q- nulo, Q+ constante Q- constante, Q+ dado pela expressão do enunciado e Q- nulo, Q+ e Q- dados pelas expressões 
+do enunciado, além dos 2 últimos problemas para k variável. 
+
+Para ver o próximo gráfico basta fechar o que encontra-se aberto e, quando todos os gráficos foram visualizados e fechados, o código é encerrado. 

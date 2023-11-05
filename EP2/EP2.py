@@ -1,0 +1,248 @@
+import numpy as np
+def main():
+    p6=([-0.9324695142031520278123016,-0.6612093864662645136613996,
+    -0.2386191860831969086305017,0.2386191860831969086305017,
+    0.6612093864662645136613996,0.9324695142031520278123016])
+    #Pesos
+    W6=([0.1713244923791703450402961,0.3607615730481386075698335,
+    0.4679139345726910473898703,0.4679139345726910473898703,
+    0.3607615730481386075698335,0.1713244923791703450402961])
+
+    p8=([-0.9602898564975362316835609,-0.7966664774136267395915539,
+    -0.5255324099163289858177390,-0.1834346424956498049394761,
+    0.1834346424956498049394761,0.5255324099163289858177390,
+    0.7966664774136267395915539,0.9602898564975362316835609])
+    W8=([0.1012285362903762591525314,0.2223810344533744705443560,
+    0.3137066458778872873379622,0.3626837833783619829651504, 
+    0.3626837833783619829651504,0.3137066458778872873379622,
+    0.2223810344533744705443560,0.1012285362903762591525314])
+
+    p10=([-0.9739065285171717200779640,-0.8650633666889845107320967,
+    -0.6794095682990244062343274,-0.4333953941292471907992659,
+    -0.1488743389816312108848260,0.1488743389816312108848260,
+    0.4333953941292471907992659,0.6794095682990244062343274,
+    0.8650633666889845107320967,0.9739065285171717200779640])
+    W10=([0.0666713443086881375935688,0.1494513491505805931457763,
+    0.2190863625159820439955349,0.2692667193099963550912269,
+    0.2955242247147528701738930,0.2955242247147528701738930,
+    0.2692667193099963550912269,0.2190863625159820439955349,
+    0.1494513491505805931457763,0.0666713443086881375935688])
+
+    print("Trabalho da disciplina MAP3121 - Métodos Numéricos e Aplicações")
+    print("Desenvolvido por: Giovanna Girotto - 11803416 & Vittor Braide Costa - 11806920")
+    print("Para resolução do EP, foi construída uma função genérica denominada 'integracao_gaussiana' e, para demonstração dos resultados, a função foi chamada para cada exercício proposto no enunciado. Os resultados são demonstrados em precisão dupla")
+    exercicio = int(input("Assim sendo, digite o número do exercício (1,2,3 ou 4) que deseja visualizar o resultado. Caso queira visualizar todos os resultados simultaneamente, digite 0"))
+    if exercicio==1:
+        print("Exercicio 1")
+        print("Volume do Cubo - Solução exata = 1.")
+        ex11=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex11)
+        print("Volume do tetraedro - Solução exata = 1/6")
+        ex12=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex12)
+        continua=int(input("Digite 1 para visualizar a solução dos outros exercícios ou digite 0 para encerrar o código"))
+        if continua==1:
+            print("Exercicio 2")
+            print("Integral com extremos 0 e 1-x^2 - Solução exata = 2/3")
+            ex21=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex21)
+            print("Integral com extremos 0 e sqrt(1-y) - Solução exata = 2/3")
+            ex22=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex22)
+            print("Exercicio 3")
+            print("Volume abaixo da região - Solução 'exata' (precisão dupla) = 0.03330557")
+            ex31=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x))])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex31)
+            print("Área da superfície - Solução 'exata' (precisão dupla) = 0.10549788")
+            ex32=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex32)
+            print("Exercicio 4")
+            print("Volume da calota esférica - Solução 'exata' (precisão dupla) = 0.17998708")
+            ex41=np.double([integracao_gaussiana(W6,p6,6,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5,lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex41)
+            print("Sólido obtido por revolução - Solução 'exata' (precisão dupla) = 3.75824963")
+            ex42=np.double([integracao_gaussiana(W6,p6,6,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex42)
+        else: 
+            exit()
+    if exercicio==2:
+        print("Exercicio 2")
+        print("Integral com extremos 0 e 1-x^2 - Solução exata = 2/3")
+        ex21=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex21)
+        print("Integral com extremos 0 e sqrt(1-y) - Solução exata = 2/3")
+        ex22=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex22)
+        continua=int(input("Digite 1 para visualizar a solução dos outros exercícios ou digite 0 para encerrar o código"))
+        if continua==1:
+            print("Exercicio 1")
+            print("Volume do Cubo - Solução exata = 1.")
+            ex11=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex11)
+            print("Volume do tetraedro - Solução exata = 1/6")
+            ex12=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex12)
+            print("Exercicio 3")
+            print("Volume abaixo da região - Solução 'exata' (precisão dupla) = 0.03330557")
+            ex31=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x))])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex31)
+            print("Área da superfície - Solução 'exata' (precisão dupla) = 0.10549788")
+            ex32=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex32)
+            print("Exercicio 4")
+            print("Volume da calota esférica - Solução 'exata' (precisão dupla) = 0.17998708")
+            ex41=np.double([integracao_gaussiana(W6,p6,6,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5,lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex41)
+            print("Sólido obtido por revolução - Solução 'exata' (precisão dupla) = 3.75824963")
+            ex42=np.double([integracao_gaussiana(W6,p6,6,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex42)
+        else: 
+            exit()
+
+    if exercicio==3:
+        print("Exercicio 3")
+        print("Volume abaixo da região - Solução 'exata' (precisão dupla) = 0.03330557")
+        ex31=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x))])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex31)
+        print("Área da superfície - Solução 'exata' (precisão dupla) = 0.10549788")
+        ex32=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex32)
+        continua=int(input("Digite 1 para visualizar a solução dos outros exercícios ou digite 0 para encerrar o código"))
+        if continua==1:
+            print("Exercicio 1")
+            print("Volume do Cubo - Solução exata = 1.")
+            ex11=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex11)
+            print("Volume do tetraedro - Solução exata = 1/6")
+            ex12=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex12)
+            print("Exercicio 2")
+            print("Integral com extremos 0 e 1-x^2 - Solução exata = 2/3")
+            ex21=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex21)
+            print("Integral com extremos 0 e sqrt(1-y) - Solução exata = 2/3")
+            ex22=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex22)
+            print("Exercicio 4")
+            print("Volume da calota esférica - Solução 'exata' (precisão dupla) = 0.17998708")
+            ex41=np.double([integracao_gaussiana(W6,p6,6,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5,lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex41)
+            print("Sólido obtido por revolução - Solução 'exata' (precisão dupla) = 3.75824963")
+            ex42=np.double([integracao_gaussiana(W6,p6,6,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex42)
+        else: 
+            exit()
+    if exercicio==4:
+        print("Exercicio 4")
+        print("Volume da calota esférica - Solução 'exata' (precisão dupla) = 0.17998708")
+        ex41=np.double([integracao_gaussiana(W6,p6,6,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5,lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex41)
+        print("Sólido obtido por revolução - Solução 'exata' (precisão dupla) = 3.75824963")
+        ex42=np.double([integracao_gaussiana(W6,p6,6,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex42)
+        continua=int(input("Digite 1 para visualizar a solução dos outros exercícios ou digite 0 para encerrar o código"))
+        if continua==1:
+            print("Exercicio 1")
+            print("Volume do Cubo - Solução exata = 1.")
+            ex11=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex11)
+            print("Volume do tetraedro - Solução exata = 1/6")
+            ex12=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex12)
+            print("Exercicio 2")
+            print("Integral com extremos 0 e 1-x^2 - Solução exata = 2/3")
+            ex21=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex21)
+            print("Integral com extremos 0 e sqrt(1-y) - Solução exata = 2/3")
+            ex22=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex22)
+            print("Exercicio 3")
+            print("Volume abaixo da região - Solução 'exata' (precisão dupla) = 0.03330557")
+            ex31=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x))])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex31)
+            print("Área da superfície - Solução 'exata' (precisão dupla) = 0.10549788")
+            ex32=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5)])
+            print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+            print(ex32)
+        else: 
+            exit()
+    else:
+        print("Exercicio 1")
+        print("Volume do Cubo - Solução exata = 1.")
+        ex11=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex11)
+        print("Volume do tetraedro - Solução exata = 1/6")
+        ex12=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:-x+1,lambda x,y:-x-y+1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex12)
+        print("Exercicio 2")
+        print("Integral com extremos 0 e 1-x^2 - Solução exata = 2/3")
+        ex21=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:1-x**2,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex21)
+        print("Integral com extremos 0 e sqrt(1-y) - Solução exata = 2/3")
+        ex22=np.double([integracao_gaussiana(W6,p6,6,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W8,p8,8,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1),integracao_gaussiana(W10,p10,10,0,1,lambda x:0,lambda x:(1-x)**0.5,lambda x,y:1)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex22)
+        print("Exercicio 3")
+        print("Volume abaixo da região - Solução 'exata' (precisão dupla) = 0.03330557")
+        ex31=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x)),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:np.exp(y/x))])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex31)
+        print("Área da superfície - Solução 'exata' (precisão dupla) = 0.10549788")
+        ex32=np.double([integracao_gaussiana(W6,p6,6,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W8,p8,8,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5),integracao_gaussiana(W10,p10,10,0.1,0.5,lambda x:x**3,lambda x:x**2,lambda x,y:((-y/(x**2)*np.exp(y/x))**2+(1/x*np.exp(y/x))**2+1)**0.5)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex32)
+        print("Exercicio 4")
+        print("Volume da calota esférica - Solução 'exata' (precisão dupla) = 0.17998708")
+        ex41=np.double([integracao_gaussiana(W6,p6,6,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5,lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,0.75,1,lambda x:0,lambda x:(1-x**2)**0.5 ,lambda x,y:2*np.pi*y)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex41)
+        print("Sólido obtido por revolução - Solução exata = 3.75824963")
+        ex42=np.double([integracao_gaussiana(W6,p6,6,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W8,p8,8,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y),integracao_gaussiana(W10,p10,10,-1,1,lambda x:0,lambda x:np.exp(-(x**2)),lambda x,y:2*np.pi*y)])
+        print("Solução numérica p/ n=6, n=8 e n=10 respectivamente:")
+        print(ex42)
+
+def integracao_gaussiana(W,p,n,a,b,c,d,f):
+    I1=0
+    for i in range(n):
+        x=((b-a)*p[i]+(a+b))/2
+        u=(b-a)*W[i]/2
+        for j in range(n):
+            v=(d(x)-c(x))*W[j]/2
+            y=((d(x)-c(x))*p[j]+(c(x)+d(x)))/2
+            I1+=u*v*f(x,y)
+    return I1
+main()

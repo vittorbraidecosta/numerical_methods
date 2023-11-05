@@ -1,0 +1,6 @@
+Trabalho da disciplina MAP3121 - Métodos Numéricos e Aplicações
+Desenvolvido por: Giovanna Girotto - 11803416 & Vittor Braide Costa - 11806920
+Para resolução do EP, foi construída uma função genérica denominada 'integracao_gaussiana' e, para demonstração dos resultados, a função foi chamada para cada exercício proposto no enunciado. Os resultados são demonstrados em precisão dupla
+A função demanda 8 inputs diferentes: 'W', 'p' e 'n' são os nós, pesos e numéro de operações respectivamente, 'a' e 'b' os limites de integração da integral mais externa, 'c' e 'd' funções com dependência em x e limites de integração da integral interna. Por último, 'f' é a função que deseja-se integrar propriamente.
+Vale ressaltar que 'c', 'd' e 'f' são do tipo lambda do python, portanto ao chamar a função devem ser descritas como (c=lambda x:x**3) para c(x)=x^3, por exemplo.
+Para visualizar os resultados obtidos, basta executar o código e, em sequência o programa exige algumas interações bem intuitivas com o usuário, todas as instruções aparecem diretamente ao executar o código. 
