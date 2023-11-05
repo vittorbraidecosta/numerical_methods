@@ -1,6 +1,6 @@
 # About the repo 
 
-This repo contains three different codes to solve numerical methods proposed by the module 'Numerical Methods and Applications' at the University of São Paulo. Each code has a PDF report of all processes developed. As it was developed to a lecture in São Paulo, it is written in Portuguese. 
+*Created on 2022.1* | This repo contains three different codes to solve numerical methods proposed by the module 'Numerical Methods and Applications' at the University of São Paulo. Each code has a PDF report of all processes developed. As it was developed to a lecture in São Paulo, it is written in Portuguese. 
 
 ## EP1 - Code 1
 
